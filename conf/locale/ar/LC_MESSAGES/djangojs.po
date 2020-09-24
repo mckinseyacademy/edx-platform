@@ -10938,5 +10938,5 @@ msgid "Search and filter all posts to find specific topics or posts."
 msgstr "البحث وصفِّ جميع المنشورات للعثور على المواضيع أو المنشورات المحددة."
 
 #: lms/djangoapps/discussion/static/discussion/templates/discussion-home.underscore
-msgid "Questions raise issues that need answers. Discussions share ideas and start conversations"
+msgid "Questions raise issues that need answers. Discussions share ideas and start conversations."
 msgstr "تثير الأسئلة مشكلات تحتاج إلى إجابات. وتشارك المناقشات أفكارًا وتفتتح المحادثات"

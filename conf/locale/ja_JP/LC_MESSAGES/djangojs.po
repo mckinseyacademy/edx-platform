@@ -10387,5 +10387,13 @@ msgid "Search and filter all posts to find specific topics or posts."
 msgstr "検索するには、全統校の検索およびフィルタリング機能を使用します。"
 
 #: lms/djangoapps/discussion/static/discussion/templates/discussion-home.underscore
-msgid "Questions raise issues that need answers. Discussions share ideas and start conversations"
+msgid "Questions raise issues that need answers. Discussions share ideas and start conversations."
 msgstr "質問: 回答が必要な問題を提起します。ディスカッション: 対話を開始し、アイデアを共有します。"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Title can't be empty"
+msgstr "件名は空欄にできません。"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Body can't be empty"
+msgstr "本文は空欄にできません。"

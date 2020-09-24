@@ -10572,5 +10572,13 @@ msgid "Search and filter all posts to find specific topics or posts."
 msgstr "“搜索和筛选所有帖子”以查找特定主题或帖子。"
 
 #: lms/djangoapps/discussion/static/discussion/templates/discussion-home.underscore
-msgid "Questions raise issues that need answers. Discussions share ideas and start conversations"
+msgid "Questions raise issues that need answers. Discussions share ideas and start conversations."
 msgstr "使用“问题”可提出需要解答的问题。使用“讨论”可分享想法并开始对话"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Title can't be empty"
+msgstr "标题不能为空"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Body can't be empty"
+msgstr "正文不能为空"

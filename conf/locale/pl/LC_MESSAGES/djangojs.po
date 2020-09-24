@@ -1254,7 +1254,7 @@ msgid "Delete"
 msgstr "Usuń"
 
 #: lms/djangoapps/discussion/static/discussion/templates/discussion-home.underscore
-msgid "Questions raise issues that need answers. Discussions share ideas and start conversations"
+msgid "Questions raise issues that need answers. Discussions share ideas and start conversations."
 msgstr "Za pomocą Pytania możesz podnieść kwestie wymagające odpowiedzi. Za pomocą Dyskusji możesz podzielić się spostrzeżeniami i rozpocząć rozmowę."
 
 #: common/static/js/src/jquery.timeago.locale.js
@@ -1338,3 +1338,11 @@ msgstr "Cofnij (Ctrl+Z)"
 #: lms/static/js/Markdown.Editor.js
 msgid "Redo (Ctrl+Y)"
 msgstr "Powtórz (Ctrl+Y)"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Title can't be empty"
+msgstr "tytuł nie może być pusty"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Body can't be empty"
+msgstr "treść nie może być pusta"
