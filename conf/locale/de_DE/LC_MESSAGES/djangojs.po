@@ -10938,5 +10938,13 @@ msgid "Search and filter all posts to find specific topics or posts."
 msgstr "Alle Beiträge durchsuchen und filtern, um bestimmte Themen oder Beiträge zu finden."
 
 #: lms/djangoapps/discussion/static/discussion/templates/discussion-home.underscore
-msgid "Questions raise issues that need answers. Discussions share ideas and start conversations"
+msgid "Questions raise issues that need answers. Discussions share ideas and start conversations."
 msgstr "Fragen werfen Probleme auf, die gelöst werden müssen. Diskussionen dienen dem Ideenaustausch und regen Gespräche an"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Title can't be empty"
+msgstr "Titel darf nicht leer sein"
+
+#: discussions/views/new_post_view_spec.js
+msgid "Body can't be empty"
+msgstr "Text darf nicht leer sein"
