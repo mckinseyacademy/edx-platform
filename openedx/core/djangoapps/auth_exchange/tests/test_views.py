@@ -16,7 +16,8 @@ import mock
 from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
-from oauth2_provider.models import Application
+from django.utils.timezone import now
+from oauth2_provider.models import Application, AccessToken
 from rest_framework.test import APIClient
 from social_django.models import Partial
 
@@ -172,7 +173,7 @@ class TestLoginWithAccessTokenView(TestCase):
         Calls the login_with_access_token endpoint and verifies the response given the expected values.
         """
         url = reverse("login_with_access_token")
-        response = self.client.post(url, HTTP_AUTHORIZATION=u"Bearer {0}".format(access_token).encode('utf-8'))
+        response = self.client.post(url, HTTP_AUTHORIZATION="Bearer {0}".format(access_token).encode('utf-8'))
         self.assertEqual(response.status_code, expected_status_code)
         if expected_cookie_name:
             self.assertIn(expected_cookie_name, response.cookies)
@@ -180,7 +181,8 @@ class TestLoginWithAccessTokenView(TestCase):
     def test_success(self):
         access_token = AccessToken.objects.create(
             token="test_access_token",
-            client=self.oauth2_client,
+            application=self.oauth2_client,
+            expires=now() + timedelta(days=30),
             user=self.user,
         )
         self._verify_response(access_token, expected_status_code=204, expected_cookie_name='sessionid')
