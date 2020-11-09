@@ -1,6 +1,5 @@
 """Models for the util app. """
-
-
+import base64
 import gzip
 import logging
 from io import BytesIO
@@ -61,7 +60,7 @@ class CompressedTextField(CreatorMixin, models.TextField):
             if isinstance(value, six.text_type):
                 value = value.encode('utf8')
             value = compress_string(value)
-            value = value.encode('base64').decode('utf8')
+            value = base64.encodebytes(value).decode('utf8')
         return value
 
     def to_python(self, value):
