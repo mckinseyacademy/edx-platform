@@ -66,16 +66,14 @@ class AdminCourseModePageTest(ModuleStoreTestCase):
         response = self.client.get(reverse('admin:course_modes_coursemode_changelist'))
         self.assertContains(response, get_time_display(expiration, '%B %d, %Y, %H:%M  %p'))
 
-        self.assertIn('_auth_user_id', self.client.session)
-        self.assertEqual(int(self.client.session['_auth_user_id']), user.pk)
         # Verify that on the edit page the datetime value appears as UTC.
-        # resp = self.client.get(reverse('admin:course_modes_coursemode_change', args=(1,)))
-        # self.assertContains(resp, expiration.date())
-        # self.assertContains(resp, expiration.time())
+        course_mode = CourseMode.objects.last()
+        resp = self.client.get(reverse('admin:course_modes_coursemode_change', args=(course_mode.id,)))
+        self.assertContains(resp, expiration.date())
+        self.assertContains(resp, expiration.time())
 
         # Verify that the expiration datetime is the same as what we set
         # (hasn't changed because of a timezone translation).
-        course_mode = CourseMode.objects.get(pk=1)
         self.assertEqual(course_mode.expiration_datetime.replace(tzinfo=None), expiration.replace(tzinfo=None))
 
 
