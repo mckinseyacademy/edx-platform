@@ -93,7 +93,7 @@ def i18n_dummy():
     "pavelib.prereqs.install_prereqs",
 )
 @timed
-def i18n_compilejs(options):
+def i18n_compilejs():
     """
     Generating djangojs.js files using django-statici18n
     """
@@ -261,7 +261,7 @@ def i18n_robot_push():
     """
     Extract new strings, and push to transifex
     """
-    pass
+    pass  # pylint: disable=unnecessary-pass
 
 
 @task
@@ -326,6 +326,6 @@ def find_release_resources():
 
     if not resources:
         raise ValueError("You need two release-* resources defined to use this command.")
-    else:
-        msg = "Strange Transifex config! Found these release-* resources:\n" + "\n".join(resources)
-        raise ValueError(msg)
+
+    msg = "Strange Transifex config! Found these release-* resources:\n" + "\n".join(resources)
+    raise ValueError(msg)

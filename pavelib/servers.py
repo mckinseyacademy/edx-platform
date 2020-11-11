@@ -39,7 +39,7 @@ def run_server(
     """
     if system not in ['lms', 'studio']:
         print("System must be either lms or studio", file=sys.stderr)
-        exit(1)
+        sys.exit(0)
 
     if not settings:
         settings = DEFAULT_SETTINGS
