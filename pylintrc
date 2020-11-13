@@ -369,6 +369,9 @@ disable =
     unnecessary-comprehension,
     missing-module-docstring,
     missing-function-docstring,
+    no-member,
+    wrong-import-order,
+    missing-class-docstring,
 
 
 [REPORTS]

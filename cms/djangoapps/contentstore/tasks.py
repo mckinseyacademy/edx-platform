@@ -9,19 +9,15 @@ import os
 import shutil
 import tarfile
 from datetime import datetime
-from math import ceil
 from tempfile import NamedTemporaryFile, mkdtemp
 
-from celery import group
 from celery.task import task
 from celery.utils.log import get_task_logger
-from celery_utils.persist_on_failure import LoggedPersistOnFailureTask
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.core.exceptions import SuspiciousOperation
 from django.core.files import File
-from django.core.files.base import ContentFile
 from django.test import RequestFactory
 from django.utils.text import get_valid_filename
 from django.utils.translation import ugettext as _
@@ -31,14 +27,12 @@ from organizations.models import OrganizationCourse
 from path import Path as path
 from pytz import UTC
 from six import iteritems, text_type
-from six.moves import range
 from user_tasks.models import UserTaskArtifact, UserTaskStatus
 from user_tasks.tasks import UserTask
 
 from contentstore.courseware_index import CoursewareSearchIndexer, LibrarySearchIndexer, SearchIndexingError
 from contentstore.storage import course_import_export_storage
 from contentstore.utils import initialize_permissions, reverse_usage_url, translation_language
-from contentstore.video_utils import scrape_youtube_thumbnail
 from course_action_state.models import CourseRerunState
 from models.settings.course_metadata import CourseMetadata
 from openedx.core.djangoapps.embargo.models import CountryAccessRule, RestrictedCourse
@@ -53,12 +47,6 @@ from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import DuplicateCourseError, ItemNotFoundError
 from xmodule.modulestore.xml_exporter import export_course_to_xml, export_library_to_xml
 from xmodule.modulestore.xml_importer import import_course_from_xml, import_library_from_xml
-from xmodule.video_module.transcripts_utils import (
-    Transcript,
-    TranscriptsGenerationException,
-    clean_video_id,
-    get_transcript_from_contentstore
-)
 
 User = get_user_model()
 
@@ -260,7 +248,7 @@ def export_olx(self, user_id, course_key_string, language):
         self.status.set_state(u'Exporting')
         tarball = create_export_tarball(courselike_module, courselike_key, {}, self.status)
         artifact = UserTaskArtifact(status=self.status, name=u'Output')
-        artifact.file.save(name=os.path.basename(tarball.name), content=File(tarball))
+        artifact.file.save(name=os.path.basename(tarball.name), content=File(tarball))  # pylint: disable = no-member
         artifact.save()
     # catch all exceptions so we can record useful error messages
     except Exception as exception:  # pylint: disable=broad-except
@@ -367,6 +355,7 @@ class CourseImportTask(UserTask):  # pylint: disable=abstract-method
 
 @task(base=CourseImportTask, bind=True)
 def import_olx(self, user_id, course_key_string, archive_path, archive_name, language):
+    # pylint: disable = too-many-statements
     """
     Import a course or library from a provided OLX .tar.gz archive.
     """

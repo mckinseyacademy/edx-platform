@@ -43,7 +43,7 @@ class CourseRunViewSet(viewsets.GenericViewSet):
 
         raise Http404
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request):
         course_runs, __ = _accessible_courses_iter(request)
         page = self.paginate_queryset(list(course_runs))
         serializer = self.get_serializer(page, many=True)
