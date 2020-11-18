@@ -32,7 +32,7 @@ class CourseStructureTaskTests(ModuleStoreTestCase):
     """
     Test cases covering Course Structure task-related workflows
     """
-    def setUp(self, **kwargs):
+    def setUp(self):
         super(CourseStructureTaskTests, self).setUp()
         self.course = CourseFactory.create(org='TestX', course='TS101', run='T1')
         self.section = ItemFactory.create(parent=self.course, category='chapter', display_name='Test Section')

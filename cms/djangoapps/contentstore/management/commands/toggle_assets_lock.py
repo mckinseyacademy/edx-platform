@@ -11,7 +11,7 @@ from openedx.core.djangoapps.contentserver.caching import del_cached_content
 from xmodule.contentstore.django import contentstore
 from xmodule.modulestore.django import modulestore
 
-logger = logging.getLogger(__name__)  # pylint: disable=locally-disabled, invalid-name
+logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
 
 
 class Command(BaseCommand):

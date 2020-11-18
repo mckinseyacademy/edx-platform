@@ -235,7 +235,7 @@ def get_course_social_stats(course_id, end_date=None):
     """
     Helper method to get the social stats from the comment service
     """
-    url = _url_for_course_social_stats(end_date=end_date)
+    url = _url_for_course_social_stats()
     params = {'course_id': course_id}
     if end_date:
         params.update({'end_date': end_date.isoformat()})
@@ -274,11 +274,11 @@ def _url_for_user_stats(user_id, course_id):
     )
 
 
-def _url_for_user_social_stats(user_id, end_date=None):
+def _url_for_user_social_stats(user_id):
     return "{prefix}/users/{user_id}/social_stats".format(prefix=settings.PREFIX, user_id=user_id)
 
 
-def _url_for_course_social_stats(end_date=None):
+def _url_for_course_social_stats():
     return "{prefix}/users/*/social_stats".format(prefix=settings.PREFIX)
 
 

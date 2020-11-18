@@ -3,4 +3,3 @@
 
 class CourseStructureNotAvailableError(Exception):
     """ The course structure still needs to be generated. """
-    pass

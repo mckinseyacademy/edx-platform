@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 # all tasks using ResultSet.join(). I (clintonb) am opting not to make this improvement right now
                 # as I do not have time to test it fully.
                 update_course_structure.apply(args=[text_type(course_key)])
-            except Exception as ex:
+            except Exception as ex:     # pylint: disable=broad-except
                 log.exception('An error occurred while generating course structure for %s: %s',
                               text_type(course_key), text_type(ex))
 

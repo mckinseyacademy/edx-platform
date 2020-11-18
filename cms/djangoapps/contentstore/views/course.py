@@ -9,9 +9,9 @@ import logging
 import random
 import re
 import string
+from collections import defaultdict
 import dateutil.parser
 from bs4 import BeautifulSoup
-from collections import defaultdict
 
 import django.utils
 import six
@@ -29,9 +29,9 @@ from milestones import api as milestones_api
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import BlockUsageLocator
-from util.html import strip_tags
 from six import text_type
 from six.moves import filter
+from util.html import strip_tags
 
 from contentstore.course_group_config import (
     COHORT_SCHEME,
