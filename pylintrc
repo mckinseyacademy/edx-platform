@@ -72,7 +72,6 @@ init-hook = "import sys; sys.path.extend(['lms/djangoapps', 'cms/djangoapps', 'c
 [MESSAGES CONTROL]
 enable =
 	blacklisted-name,
-	line-too-long,
 
 	syntax-error,
 	init-is-generator,
@@ -213,7 +212,6 @@ enable =
 
 	unused-import,
 	unused-variable,
-	unused-argument,
 
 	exec-used,
 	eval-used,
@@ -361,6 +359,8 @@ disable =
 	no-else-break,
 	no-else-continue,
 	useless-object-inheritance,
+	unused-argument,
+	line-too-long,
 
 [REPORTS]
 output-format = text
