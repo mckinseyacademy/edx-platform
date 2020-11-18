@@ -1,20 +1,29 @@
+"""
+Management Command to repair the admin roles
+"""
+
 import datetime
 import logging
 
-from django.core.management.base import BaseCommand
-from django.core.exceptions import ObjectDoesNotExist
-
-from student.models import CourseAccessRole
 from django.contrib.auth.models import Group
-from edx_solutions_api_integration.models import CourseGroupRelationship
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.management.base import BaseCommand
+
 from edx_solutions_api_integration.courseware_access import get_course_key
+from edx_solutions_api_integration.models import CourseGroupRelationship
 from lms.djangoapps.courseware import courses
+from student.models import CourseAccessRole
 
 log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = '''Remove instructor role of internal admins on courses in their organization and add it on internal tagged courses
+    """
+    Management Command to repair the admin roles
+    """
+    help = '''Remove instructor role of internal admins on courses in their organization and add it on internal 
+    tagged courses
+
 example:
     ./manage.py lms repair_internal_admin_instructor_role dryrun --settings={aws, devstack}
 
@@ -52,9 +61,11 @@ Options:
         log.info(msg_string)
 
         if dry_run:
-            msg_string = 'Script started in dry run mode, this will print for all internal admins courses for which we need to remove or add theirs instructor role'
+            msg_string = 'Script started in dry run mode, this will print for all internal admins courses for ' \
+                         'which we need to remove or add theirs instructor role'
         else:
-            msg_string = 'Script started in repair mode, this will permanently remove or add instructor role of internal admins. THIS IS IRREVERSIBLE!'
+            msg_string = 'Script started in repair mode, this will permanently remove or add instructor role of ' \
+                         'internal admins. THIS IS IRREVERSIBLE!'
 
         log.info(msg_string)
 
@@ -86,7 +97,8 @@ Options:
             for internal_course in internal_courses:
                 internal_courses_ids.append(internal_course.course_id)
 
-        #for all internal admins check their roles and remove instructor role on course if he doesn't have staff role on course and course isn't tagged internal
+        # for all internal admins check their roles and remove instructor role on course
+        # if he doesn't have staff role on course and course isn't tagged internal
         for internal_admin in internal_admins:
             user_roles = CourseAccessRole.objects.filter(user=internal_admin)
 
@@ -102,13 +114,18 @@ Options:
                 if str(instructor_course) not in internal_courses_ids and instructor_course not in staff_courses:
                     number_of_removed_roles += 1
                     if dry_run:
-                        msg_string = 'Remove instructor role for internal admin ' + str(internal_admin.id) + ' on course ' + str(instructor_course) + '.'
+                        msg_string = 'Remove instructor role for internal admin ' + str(internal_admin.id) + \
+                                     ' on course ' + str(instructor_course) + '.'
                         log.info(msg_string)
                     else:
-                        role_to_delete = CourseAccessRole.objects.get(user=internal_admin, role=instructor_role, course_id=instructor_course)
+                        role_to_delete = CourseAccessRole.objects.get(
+                            user=internal_admin,
+                            role=instructor_role,
+                            course_id=instructor_course
+                        )
                         role_to_delete.delete()
 
-        #for all internal tagged course check roles and if internal admins don't have instructor role on course add it
+        # for all internal tagged course check roles and if internal admins don't have instructor role on course add it
         for internal_course in internal_courses:
             course_id = get_course_key(internal_course.course_id)
             course_roles = CourseAccessRole.objects.filter(course_id=course_id)
@@ -121,11 +138,17 @@ Options:
                 if internal_admin.id not in instructor_users:
                     number_of_added_roles += 1
                     if dry_run:
-                        msg_string = 'Add instructor role for internal admin ' + str(internal_admin.id) + ' on course ' + str(course_id) + '.'
+                        msg_string = 'Add instructor role for internal admin ' + str(internal_admin.id) + \
+                                     ' on course ' + str(course_id) + '.'
                         log.info(msg_string)
                     else:
                         course = courses.get_course(course_id, 0)
-                        new_role = CourseAccessRole(user=internal_admin, role=instructor_role, course_id=course.id, org=course.org)
+                        new_role = CourseAccessRole(
+                            user=internal_admin,
+                            role=instructor_role,
+                            course_id=course.id,
+                            org=course.org
+                        )
                         new_role.save()
 
         msg_string = 'Number of removed roles: ' + str(number_of_removed_roles) + '.'
@@ -133,7 +156,7 @@ Options:
         msg_string = 'Number of added roles: ' + str(number_of_added_roles) + '.'
         log.info(msg_string)
 
-        log.info('--------------------------------------------------------------------------------------------------------------------')
+        log.info('---------------------------------------------------------------------------------------------------')
 
         if create_log:
             print('Script started in create log mode, please open repair_internal_admin_instructor_role.log file.')

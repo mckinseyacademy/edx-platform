@@ -2,12 +2,11 @@ import logging
 import os
 import sys
 import time
+import xml.sax.saxutils as saxutils
 from collections import namedtuple
 from functools import partial
 
 import yaml
-import xml.sax.saxutils as saxutils
-
 from contracts import contract, new_contract
 from django.utils.encoding import python_2_unicode_compatible
 from lazy import lazy
@@ -1762,7 +1761,6 @@ class DiscussionService:
 
         """
         # for some reason pylint reports courseware.access, courseware.courses and django_comment_client.forum.views
-        # pylint: disable=import-error
         import json
         from django.conf import settings
         from django.http import HttpRequest
@@ -1837,7 +1835,6 @@ class DiscussionService:
         Returns the context to render inline discussion templates.
         """
         # for some reason pylint reports courseware.access, courseware.courses and django_comment_client.forum.views
-        # pylint: disable=import-error
         from django.conf import settings
         from lms.djangoapps.courseware.courses import get_course_with_access
         from lms.djangoapps.courseware.access import has_access

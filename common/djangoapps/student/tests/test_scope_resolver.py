@@ -48,10 +48,10 @@ class StudentTasksTestCase(ModuleStoreTestCase):
 
         # should have first two, but the third should not be present
 
-        self.assertTrue(test_user_1.id in user_ids)
-        self.assertTrue(test_user_2.id in user_ids)
+        self.assertIn(test_user_1.id, user_ids)
+        self.assertIn(test_user_2.id, user_ids)
 
-        self.assertFalse(test_user_3.id in user_ids)
+        self.assertNotIn(test_user_3.id, user_ids)
 
     def test_bad_params(self):
         """
@@ -110,7 +110,7 @@ class StudentTasksTestCase(ModuleStoreTestCase):
             None
         )
 
-        _users = [user for user in users]
+        _users = users
 
         self.assertEqual(len(_users), 2)
 
@@ -118,19 +118,19 @@ class StudentTasksTestCase(ModuleStoreTestCase):
         self.assertIn('email', _users[0])
         self.assertIn('first_name', _users[0])
         self.assertIn('last_name', _users[0])
-        self.assertEquals(_users[0]['id'], test_user_1.id)
-        self.assertEquals(_users[0]['email'], test_user_1.email)
-        self.assertEquals(_users[0]['first_name'], test_user_1.first_name)
-        self.assertEquals(_users[0]['last_name'], test_user_1.last_name)
+        self.assertEqual(_users[0]['id'], test_user_1.id)
+        self.assertEqual(_users[0]['email'], test_user_1.email)
+        self.assertEqual(_users[0]['first_name'], test_user_1.first_name)
+        self.assertEqual(_users[0]['last_name'], test_user_1.last_name)
 
         self.assertIn('id', _users[1])
         self.assertIn('email', _users[1])
         self.assertIn('first_name', _users[1])
         self.assertIn('last_name', _users[1])
-        self.assertEquals(_users[1]['id'], test_user_2.id)
-        self.assertEquals(_users[1]['email'], test_user_2.email)
-        self.assertEquals(_users[1]['first_name'], test_user_2.first_name)
-        self.assertEquals(_users[1]['last_name'], test_user_2.last_name)
+        self.assertEqual(_users[1]['id'], test_user_2.id)
+        self.assertEqual(_users[1]['email'], test_user_2.email)
+        self.assertEqual(_users[1]['first_name'], test_user_2.first_name)
+        self.assertEqual(_users[1]['last_name'], test_user_2.last_name)
 
     def test_email_resolver(self):
         """
@@ -150,7 +150,7 @@ class StudentTasksTestCase(ModuleStoreTestCase):
 
         emails = [resolved_scope['email'] for resolved_scope in resolved_scopes]
 
-        self.assertTrue(test_user_1.email in emails)
+        self.assertIn(test_user_1.email, emails)
 
     def test_bad_email_resolver(self):
         """

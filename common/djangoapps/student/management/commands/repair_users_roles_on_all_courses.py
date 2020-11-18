@@ -1,16 +1,23 @@
+"""
+Management Command to repair the user roles
+"""
+
 import datetime
 import logging
 
+from django.contrib.auth.models import Group
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
 
 from student.models import CourseAccessRole
-from django.contrib.auth.models import Group
-from django.core.exceptions import ObjectDoesNotExist
 
 log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
+    """
+    Management Command to repair the user roles
+    """
     help = """Repair users that are assistants and observers on every course
 example:
     manage.py repair_users_roles_on_all_courses dryrun --settings={aws, devstack}
@@ -49,9 +56,11 @@ Options:
         log.info(msg_string)
 
         if dry_run:
-            msg_string = "Script started in dry run mode, this will find all student roles that are conflicting on same course."
+            msg_string = "Script started in dry run mode, this will find all student roles that are conflicting on " \
+                         "same course."
         else:
-            msg_string = "Script started in repair mode, this will permanently change student role. THIS IS IRREVERSIBLE!"
+            msg_string = "Script started in repair mode, this will permanently change student role. THIS IS " \
+                         "IRREVERSIBLE!"
 
         log.info(msg_string)
 
@@ -85,7 +94,8 @@ Options:
                 else:
                     if role_entry.role not in user_course_roles[user_id][role_entry.course_id]:
                         user_course_roles[user_id][role_entry.course_id].append(role_entry.role)
-                        if "observer" in user_course_roles[user_id][role_entry.course_id] and "assistant" in user_course_roles[user_id][role_entry.course_id]:
+                        if "observer" in user_course_roles[user_id][role_entry.course_id] and \
+                                "assistant" in user_course_roles[user_id][role_entry.course_id]:
                             if dry_run:
                                 msg_string = "user id: {}, course id: {}, roles: {}".format(user_id, role_entry.course_id, user_course_roles[user_id][role_entry.course_id])
                                 log.info(msg_string)
@@ -108,10 +118,11 @@ Options:
         number_of_conflicted_users = 0
         number_of_single_conflicted_users = 0
 
-        for user_id, user_record in user_course_roles.iteritems():
+        for user_id, user_record in user_course_roles.items():
             if user_record["observer_count"] == 0 and user_record["user_conflicted"]:
                 if dry_run:
-                    msg_string = "For user id {} this was only observer role and he should be removed from global observer groups".format(user_id)
+                    msg_string = "For user id {} this was only observer role and he should be removed from global " \
+                                 "observer groups".format(user_id)
                     log.info(msg_string)
                 else:
                     if mcka_observer_group is not None:
@@ -123,12 +134,14 @@ Options:
                 number_of_conflicted_users += 1
 
         msg_string = "Fetched {} users with roles!".format(len(user_course_roles))
-        msg_string += "Number of users with both observer and ta status in same course: {}, number of users that should be removed from global observer group: {}.".format(number_of_conflicted_users, number_of_single_conflicted_users)
+        msg_string += "Number of users with both observer and ta status in same course: {}, number of users that " \
+                      "should be removed from global observer " \
+                      "group: {}.".format(number_of_conflicted_users, number_of_single_conflicted_users)
         if not dry_run:
             log.info("All users roles are cleaned!")
 
         log.info(msg_string)
-        log.info('--------------------------------------------------------------------------------------------------------------------')
+        log.info('----------------------------------------------------------------------------------------------------')
 
         if create_log:
             print("Script started in create log mode, please open repair_users_roles_on_all_courses.log file.")

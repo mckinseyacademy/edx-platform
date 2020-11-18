@@ -27,6 +27,7 @@ import sys
 import tempfile
 import time
 import threading
+from io import BytesIO as StringIO
 
 from django.conf import settings
 from django.core.exceptions import MiddlewareNotUsed
@@ -37,7 +38,6 @@ try:
 except ImportError:
     HAS_CPROFILE = False
 
-from io import BytesIO as StringIO
 
 THREAD_LOCAL = threading.local()
 
@@ -140,7 +140,9 @@ class BaseProfilerMiddleware(object):
         Output a pretty picture of the call tree (boxes and arrows)
         """
         if not which('dot'):
-            raise Exception('Could not find "dot" from Graphviz; please install Graphviz to enable call graph generation')
+            raise Exception(
+                'Could not find "dot" from Graphviz; please install Graphviz to enable call graph generation'
+            )
         if not which('gprof2dot'):
             raise Exception('Could not find gprof2dot; have you updated your dependencies recently?')
         command = ('gprof2dot -f pstats {} | dot -Tpdf'.format(THREAD_LOCAL.data_file.name))
@@ -387,8 +389,6 @@ class HotshotProfilerMiddleware(BaseProfilerMiddleware):
     See https://docs.python.org/2/library/hotshot.html for more info
     WARNING: The Hotshot profiler is not thread safe.
     """
-    def __init__(self, *args, **kwargs):
-        super(HotshotProfilerMiddleware, self).__init__(*args, **kwargs)
 
     def profiler_type(self):
         """
@@ -408,7 +408,7 @@ class HotshotProfilerMiddleware(BaseProfilerMiddleware):
         """
         return hotshot.Profile(THREAD_LOCAL.data_file.name)
 
-    def profiler_stop(self, stream):  # pylint: disable=W0221
+    def profiler_stop(self, stream):
         """
         Store profiler data in file and return statistics to caller
         """
@@ -421,8 +421,6 @@ class CProfileProfilerMiddleware(BaseProfilerMiddleware):
     CProfile is a runtime profiler available natively in Python
     See https://docs.python.org/2/library/profile.html#module-cProfile for more info
     """
-    def __init__(self):
-        super(CProfileProfilerMiddleware, self).__init__()
 
     def profiler_type(self):
         """

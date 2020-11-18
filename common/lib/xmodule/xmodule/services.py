@@ -130,6 +130,7 @@ class NotificationsService(object):
 
     def _bind_to_module_functions(self, module):
         """
+        Bind to module function.
         """
         for attr_name in dir(module):
             attr = getattr(module, attr_name, None)

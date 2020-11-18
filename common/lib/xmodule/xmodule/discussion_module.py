@@ -1,5 +1,4 @@
 from pkg_resources import resource_string
-from uuid import uuid4
 
 from xblock.completable import XBlockCompletionMode
 from xblock.fields import String, Scope, UNIQUE_ID
@@ -13,6 +12,9 @@ _ = lambda text: text
 
 
 class DiscussionFields(object):
+    """
+    Discussion Field class.
+    """
 
     completion_mode = XBlockCompletionMode.EXCLUDED
 
@@ -35,19 +37,24 @@ class DiscussionFields(object):
     discussion_category = String(
         display_name=_("Category"),
         default="Week 1",
-        help=_("A category name for the discussion. This name appears in the left pane of the discussion forum for the course."),
+        help=_("A category name for the discussion. This name appears in the left pane of the discussion forum for "
+               "the course."),
         scope=Scope.settings
     )
     discussion_target = String(
         display_name=_("Subcategory"),
         default="Topic-Level Student-Visible Label",
-        help=_("A subcategory name for the discussion. This name appears in the left pane of the discussion forum for the course."),
+        help=_("A subcategory name for the discussion. This name appears in the left pane of the discussion forum "
+               "for the course."),
         scope=Scope.settings
     )
     sort_key = String(scope=Scope.settings)
 
 
 class DiscussionModule(DiscussionFields, XModule):
+    """
+    Discussion Module class.
+    """
     js = {
         'coffee': [
             resource_string(__name__, 'js/src/discussion/display.coffee')
@@ -77,6 +84,9 @@ class DiscussionModule(DiscussionFields, XModule):
 
 
 class DiscussionDescriptor(DiscussionFields, MetadataOnlyEditingDescriptor, RawDescriptor):
+    """
+    Discussion Descriptor class.
+    """
 
     module_class = DiscussionModule
     # The discussion XML format uses `id` and `for` attributes,

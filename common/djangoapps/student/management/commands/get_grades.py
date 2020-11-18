@@ -2,21 +2,26 @@
 Management command to generate a list of grades for
 all students that are enrolled in a course.
 """
-from util.request import RequestMock
-from lms.djangoapps.courseware import grades, courses
-from certificates.models import GeneratedCertificate
-from django.core.management.base import BaseCommand, CommandError
+import csv
+import datetime
 import os
+from optparse import make_option
+
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand, CommandError
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import CourseLocator
-from django.contrib.auth.models import User
-from optparse import make_option
-import datetime
-import csv
+
+from certificates.models import GeneratedCertificate
+from lms.djangoapps.courseware import courses, grades
+from util.request import RequestMock
 
 
 class Command(BaseCommand):
+    """
+    Command to generate a list of grades for  all students that are enrolled in a course.
+    """
 
     help = """
     Generate a list of grades for all students
@@ -108,7 +113,9 @@ class Command(BaseCommand):
             percents = {section['label']: section['percent'] for section in grade['section_breakdown']}
             row_percents = [percents[label] for label in header]
             if student.username in cert_grades:
-                rows.append([student.email, student.username, cert_grades[student.username], grade['percent']] + row_percents)
+                rows.append(
+                    [student.email, student.username, cert_grades[student.username], grade['percent']] + row_percents
+                )
             else:
                 rows.append([student.email, student.username, "N/A", grade['percent']] + row_percents)
         with open(options['output'], 'wb') as f:

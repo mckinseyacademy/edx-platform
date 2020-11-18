@@ -71,7 +71,7 @@ def send_activation_email(self, msg_string, from_address=None):
 
 
 @task()
-def publish_course_notifications_task(course_id, notification_msg, exclude_user_ids=None):  # pylint: disable=invalid-name
+def publish_course_notifications_task(course_id, notification_msg, exclude_user_ids=None):
     """
     This function will call the edx_notifications api method "bulk_publish_notification_to_users"
     and run as a new Celery task.
@@ -101,7 +101,7 @@ def publish_course_notifications_task(course_id, notification_msg, exclude_user_
                         preferred_channel=preferred_channel,
                         channel_context=channel_context
                     )
-    except Exception as ex:
+    except Exception as ex:     # pylint: disable=broad-except
         # Notifications are never critical, so we don't want to disrupt any
         # other logic processing. So log and continue.
         log.exception(ex)

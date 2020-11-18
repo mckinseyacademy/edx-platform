@@ -1,3 +1,6 @@
+"""
+Management Command to update the anonymous users id.
+"""
 # When changing the `SECRET_KEY` of an instance, all anonymous user ids change as well.
 # Since #13717 the new anonymous ids are stored in the database in addition to the old
 # ones, so both the old and the new anonymous ids can be inverted.
@@ -13,11 +16,17 @@ import logging
 
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
-from student.models import AnonymousUserId, anonymous_id_for_user
-from submissions.models import StudentItem, ScoreAnnotation
 from openassessment.assessment.models import (
-    AIGradingWorkflow, Assessment, PeerWorkflow, StaffWorkflow, StudentTrainingWorkflow,
+    AIGradingWorkflow,
+    Assessment,
+    PeerWorkflow,
+    StaffWorkflow,
+    StudentTrainingWorkflow
 )
+from submissions.models import ScoreAnnotation, StudentItem
+
+from student.models import AnonymousUserId, anonymous_id_for_user
+
 try:
     from problem_builder.models import Answer
 except ImportError:
@@ -29,6 +38,9 @@ log.setLevel(logging.INFO)
 
 
 class Command(BaseCommand):
+    """
+    Management Command to update the anonymous users id.
+    """
     help = """
     We can now have multiple anonymous user ids for a given user+course.
     This is useful if we have to change the app's SECRET_KEY, which is used to generate the anonymous user ids.
@@ -63,13 +75,17 @@ class Command(BaseCommand):
 
     @staticmethod
     def generate_anonymous_user_ids():
-        '''Generate new anonymous user id using the current settings.SECRET_KEY.'''
+        """
+        Generate new anonymous user id using the current settings.SECRET_KEY.
+        """
         for anonymous_id in AnonymousUserId.objects.all():
             anonymous_id_for_user(anonymous_id.user, anonymous_id.course_id, save=True)
 
     @staticmethod
     def get_old_to_new_anonymous_user_ids():
-        '''Returns a mapping between each existing anonymous user id and the most recent one found in the database.'''
+        """
+        Returns a mapping between each existing anonymous user id and the most recent one found in the database.
+        """
         user_course_id = {}
         old_to_new_anon_id = {}
 
