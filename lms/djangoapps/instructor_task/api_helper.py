@@ -101,7 +101,7 @@ def _reserve_task(course_id, task_type, task_key, task_input, requester):
         task_id = _get_running_task_id(course_id, task_type, task_key)
         error_message = generate_already_running_error_message(task_type)
         error = AlreadyRunningError(error_message)
-        setattr(error, 'running_task_id', task_id)
+        error.running_task_id = task_id
         raise error
 
     try:

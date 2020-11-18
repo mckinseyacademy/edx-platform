@@ -32,7 +32,7 @@ from openedx.core.djangolib.testing.utils import CacheIsolationTestCase
 from openedx.core.lib.url_utils import quote_slashes
 from student.tests.factories import CourseEnrollmentFactory, UserFactory
 from xmodule.modulestore import ModuleStoreEnum
-from xmodule.modulestore.django import modulestore, SignalHandler
+from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.tests.django_utils import ModuleStoreTestCase
 from xmodule.modulestore.tests.factories import CourseFactory, ItemFactory
 
