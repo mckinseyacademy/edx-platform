@@ -1,9 +1,9 @@
 import csv
-import dateutil
+import os
 from datetime import datetime
+import dateutil
 
 from django.core.management.base import BaseCommand, CommandError
-import os
 from path import Path as path
 
 from opaque_keys import InvalidKeyError

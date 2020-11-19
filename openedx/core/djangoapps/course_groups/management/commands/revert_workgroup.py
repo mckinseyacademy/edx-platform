@@ -1,9 +1,9 @@
 """
 Django management command to Revert the multiple cohorts feature.
 """
+from optparse import make_option
 from django.core.management.base import BaseCommand
 from django.core.exceptions import MultipleObjectsReturned
-from optparse import make_option
 
 from django.contrib.auth.models import User
 

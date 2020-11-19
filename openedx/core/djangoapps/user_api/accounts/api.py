@@ -11,9 +11,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.validators import ValidationError, validate_email
 from django.utils.translation import override as override_language
 from django.utils.translation import ugettext as _
+from pytz import UTC
 from edx_notifications.lib import admin as notification_admin
 from openedx.core.djangoapps.profile_images.tasks import delete_profile_images
-from pytz import UTC
 from student import views as student_views
 from student.models import (
     AccountRecovery,

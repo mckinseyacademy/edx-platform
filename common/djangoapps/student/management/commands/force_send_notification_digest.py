@@ -3,10 +3,16 @@ Django management command to force-send the daily/weekly digest emails
 """
 import sys
 import datetime
-import pytz
 import logging
 import logging.config
+from optparse import OptionParser
+import pytz
+
 from django.conf import settings
+from django.core.management.base import BaseCommand, CommandError
+
+from edx_notifications import const
+from edx_notifications.digests import send_notifications_digest, send_notifications_namespace_digest
 
 # This is specifically placed at the top
 # to act as a logic configuration override for the rest of the
@@ -28,13 +34,6 @@ if not getattr(settings, 'TEST_MODE', False):
             'level': 'INFO'
         }
     })
-
-from django.core.management.base import BaseCommand, CommandError
-
-from edx_notifications import const
-from edx_notifications.digests import send_notifications_digest, send_notifications_namespace_digest
-
-from optparse import make_option, OptionParser
 
 
 log = logging.getLogger(__file__)

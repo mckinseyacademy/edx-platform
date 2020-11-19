@@ -25,7 +25,6 @@ from django.test import RequestFactory, TestCase
 from django.test.utils import override_settings
 from django.urls import reverse as django_reverse
 from django.utils.translation import ugettext as _
-from openedx.core.djangoapps.oauth_dispatch.tests.factories import ApplicationFactory, AccessTokenFactory
 from edx_when.api import get_overrides_for_user
 from mock import Mock, NonCallableMock, patch
 from opaque_keys.edx.keys import CourseKey
@@ -34,6 +33,7 @@ from pytz import UTC
 from six import text_type, unichr
 from six.moves import range, zip
 from testfixtures import LogCapture
+from openedx.core.djangoapps.oauth_dispatch.tests.factories import ApplicationFactory, AccessTokenFactory
 
 from bulk_email.models import BulkEmailFlag, CourseEmail, CourseEmailTemplate
 from course_modes.models import CourseMode

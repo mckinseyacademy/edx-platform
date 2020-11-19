@@ -7,10 +7,10 @@ import hashlib
 import json
 import logging
 import textwrap
-import pytz
 from collections import OrderedDict
 from functools import partial
 from datetime import datetime
+import pytz
 
 import six
 from completion import waffle as completion_waffle

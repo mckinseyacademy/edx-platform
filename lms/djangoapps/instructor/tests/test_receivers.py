@@ -1,4 +1,3 @@
-# pylint: disable=E1101
 """
 Run these tests @ Devstack:
     paver test_system -s lms --test_id=lms/djangoapps/gradebook/tests.py

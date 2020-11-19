@@ -3,9 +3,10 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from student.models import CourseAccessRole
 from django.contrib.auth.models import Group
 from django.core.exceptions import ObjectDoesNotExist
+from student.models import CourseAccessRole
+
 
 log = logging.getLogger(__name__)
 

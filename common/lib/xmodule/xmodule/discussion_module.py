@@ -1,5 +1,4 @@
 from pkg_resources import resource_string
-from uuid import uuid4
 
 from xblock.completable import XBlockCompletionMode
 from xblock.fields import String, Scope, UNIQUE_ID

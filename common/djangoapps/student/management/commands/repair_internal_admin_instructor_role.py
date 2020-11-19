@@ -3,11 +3,10 @@ import logging
 
 from django.core.management.base import BaseCommand
 from django.core.exceptions import ObjectDoesNotExist
-
-from student.models import CourseAccessRole
 from django.contrib.auth.models import Group
 from edx_solutions_api_integration.models import CourseGroupRelationship
 from edx_solutions_api_integration.courseware_access import get_course_key
+from student.models import CourseAccessRole
 from lms.djangoapps.courseware import courses
 
 log = logging.getLogger(__name__)

@@ -9,9 +9,9 @@ import logging
 import random
 import re
 import string
+from collections import defaultdict
 import dateutil.parser
 from bs4 import BeautifulSoup
-from collections import defaultdict
 
 import django.utils
 import six
@@ -29,9 +29,11 @@ from milestones import api as milestones_api
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys.edx.locator import BlockUsageLocator
-from util.html import strip_tags
 from six import text_type
 from six.moves import filter
+from edx_notifications.data import NotificationMessage
+from edx_notifications.lib.publisher import get_notification_type
+from util.html import strip_tags
 
 from contentstore.course_group_config import (
     COHORT_SCHEME,
@@ -59,8 +61,6 @@ from course_action_state.models import CourseRerunState, CourseRerunUIStateManag
 from course_creators.views import add_user_with_status_unrequested, get_course_creator_status
 from course_modes.models import CourseMode
 from edxmako.shortcuts import render_to_response
-from edx_notifications.data import NotificationMessage
-from edx_notifications.lib.publisher import get_notification_type
 from models.settings.course_grading import CourseGradingModel
 from models.settings.course_metadata import CourseMetadata
 from models.settings.encoder import CourseSettingsEncoder

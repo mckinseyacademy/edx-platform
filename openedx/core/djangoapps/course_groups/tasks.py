@@ -1,12 +1,12 @@
 """
 This file contains celery tasks for student course enrollment
 """
+import logging
 
 from celery.task import task
-from .models import CourseUserGroup
 from edx_notifications.lib.publisher import bulk_publish_notification_to_users
+from .models import CourseUserGroup
 
-import logging
 
 log = logging.getLogger(__name__)
 

@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 """
 Unit tests for namespace_resolver.py
 """

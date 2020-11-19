@@ -4,13 +4,13 @@ A User Scope Resolver that can be used by edx-notifications
 
 import logging
 
-from student.models import CourseEnrollment
 from edx_notifications.scopes import NotificationUserScopeResolver
 from django.contrib.auth.models import User
 
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.locator import CourseLocator
+from student.models import CourseEnrollment
 
 log = logging.getLogger(__name__)
 

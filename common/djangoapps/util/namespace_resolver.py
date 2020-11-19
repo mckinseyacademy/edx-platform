@@ -2,14 +2,12 @@
 A namespace resolver for edx-notifications. This basically translates a namespace
 into information about the namespace
 """
-
-from xmodule.modulestore.django import modulestore
-from student.scope_resolver import NamespaceEnrollmentsScopeResolver
 from edx_notifications.namespaces import NotificationNamespaceResolver
-
 from opaque_keys.edx.keys import CourseKey
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.locator import CourseLocator
+from xmodule.modulestore.django import modulestore
+from student.scope_resolver import NamespaceEnrollmentsScopeResolver
 
 
 class CourseNamespaceResolver(NotificationNamespaceResolver):

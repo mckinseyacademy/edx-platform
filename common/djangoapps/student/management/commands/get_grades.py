@@ -2,18 +2,18 @@
 Management command to generate a list of grades for
 all students that are enrolled in a course.
 """
-from util.request import RequestMock
-from lms.djangoapps.courseware import grades, courses
-from certificates.models import GeneratedCertificate
-from django.core.management.base import BaseCommand, CommandError
 import os
-from opaque_keys import InvalidKeyError
-from opaque_keys.edx.keys import CourseKey
-from opaque_keys.edx.locator import CourseLocator
-from django.contrib.auth.models import User
 from optparse import make_option
 import datetime
 import csv
+from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth.models import User
+from opaque_keys import InvalidKeyError
+from opaque_keys.edx.keys import CourseKey
+from opaque_keys.edx.locator import CourseLocator
+from util.request import RequestMock
+from lms.djangoapps.courseware import grades, courses
+from certificates.models import GeneratedCertificate
 
 
 class Command(BaseCommand):

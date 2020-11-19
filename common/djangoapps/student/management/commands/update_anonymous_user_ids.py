@@ -13,11 +13,12 @@ import logging
 
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
-from student.models import AnonymousUserId, anonymous_id_for_user
 from submissions.models import StudentItem, ScoreAnnotation
 from openassessment.assessment.models import (
     AIGradingWorkflow, Assessment, PeerWorkflow, StaffWorkflow, StudentTrainingWorkflow,
 )
+from student.models import AnonymousUserId, anonymous_id_for_user
+
 try:
     from problem_builder.models import Answer
 except ImportError:

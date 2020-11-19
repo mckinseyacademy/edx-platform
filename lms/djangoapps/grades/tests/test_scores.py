@@ -7,8 +7,8 @@ import itertools
 # pylint: disable=protected-access
 from collections import namedtuple
 
-import ddt
 import unittest
+import ddt
 from django.test import TestCase
 from django.utils.timezone import now
 from opaque_keys.edx.locator import BlockUsageLocator, CourseLocator

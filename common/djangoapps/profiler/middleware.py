@@ -27,6 +27,7 @@ import sys
 import tempfile
 import time
 import threading
+from io import BytesIO as StringIO
 
 from django.conf import settings
 from django.core.exceptions import MiddlewareNotUsed
@@ -37,7 +38,6 @@ try:
 except ImportError:
     HAS_CPROFILE = False
 
-from io import BytesIO as StringIO
 
 THREAD_LOCAL = threading.local()
 

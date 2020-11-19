@@ -1,7 +1,8 @@
 """ Tests for export discussion participation statistics command"""
+from datetime import datetime
+from io import StringIO
 import ddt
 import mock
-from io import StringIO
 
 from django.test import TestCase
 from django.core.management.base import CommandError
@@ -13,7 +14,6 @@ from lms.djangoapps.discussion.django_comment_client import utils
 from lms.djangoapps.discussion.management.commands.export_discussion_participation import (
     Command as ExportDiscussionCommand, Extractor, Exporter, DiscussionExportFields
 )
-from datetime import datetime
 
 # pylint: disable=invalid-name
 from openedx.core.djangoapps.course_groups.models import CourseCohortsSettings

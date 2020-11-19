@@ -5,9 +5,8 @@ import time
 from collections import namedtuple
 from functools import partial
 
-import yaml
 import xml.sax.saxutils as saxutils
-
+import yaml
 from contracts import contract, new_contract
 from django.utils.encoding import python_2_unicode_compatible
 from lazy import lazy
