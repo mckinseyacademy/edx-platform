@@ -2091,6 +2091,9 @@ INSTALLED_APPS = [
     # edX Video Pipeline integration
     'openedx.core.djangoapps.video_pipeline',
 
+    # CMS apps
+    'cms.djangoapps.course_creators',
+
     # Our courseware
     'courseware',
     'student.apps.StudentConfig',
