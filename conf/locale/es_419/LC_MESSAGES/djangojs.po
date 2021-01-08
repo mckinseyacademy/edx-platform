@@ -2907,7 +2907,7 @@ msgstr "¿Deseas abandonar este equipo?"
 
 #: lms/djangoapps/teams/static/teams/js/views/team_profile.js
 msgid ""
-"If you leave, you can no longer post in this team's discussions. Your place "
+"If you leave, you can no longer post in this team's discussions.Your place "
 "will be available to another learner."
 msgstr ""
 "Si abandonas este equipo, no podrás escribir en las discusiones de este "
@@ -9831,11 +9831,11 @@ msgstr ""
 msgid ""
 "%(download_link_start)sDownload this image (right-click or option-click, "
 "save as)%(link_end)s and then %(upload_link_start)supload%(link_end)s it to "
-"your backpack.</li>"
+"your backpack."
 msgstr ""
 "%(download_link_start)sDescarga esta imagen (haz clic derecho o pulsa "
 "opción, guardar como)%(link_end)s y después "
-"%(upload_link_start)ssubirla%(link_end)s a tu mochila.</li>"
+"%(upload_link_start)ssubirla%(link_end)s a tu mochila."
 
 #: cms/templates/js/access-editor.underscore
 msgid "Limit Access"

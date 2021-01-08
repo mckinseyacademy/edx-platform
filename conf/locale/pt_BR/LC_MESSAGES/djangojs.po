@@ -2843,7 +2843,7 @@ msgstr "Sair desta equipe?"
 
 #: lms/djangoapps/teams/static/teams/js/views/team_profile.js
 msgid ""
-"If you leave, you can no longer post in this team's discussions. Your place "
+"If you leave, you can no longer post in this team's discussions.Your place "
 "will be available to another learner."
 msgstr ""
 "Se você sair, não será mais possível publicar nas discussões deste time. Seu"

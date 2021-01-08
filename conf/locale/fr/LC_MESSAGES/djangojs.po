@@ -2916,7 +2916,7 @@ msgstr "Quitter cette équipe ?"
 
 #: lms/djangoapps/teams/static/teams/js/views/team_profile.js
 msgid ""
-"If you leave, you can no longer post in this team's discussions. Your place "
+"If you leave, you can no longer post in this team's discussions.Your place "
 "will be available to another learner."
 msgstr ""
 "Si vous partez, vous ne pourrez plus poster dans les discussions de "
