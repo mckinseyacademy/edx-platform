@@ -1228,7 +1228,7 @@
     "delete group": "excluir grupo",
     "discussion": "discuss\u00e3o",
     "discussion posted": "discuss\u00e3o postada",
-    "discussion posted %(time_ago)s by %(author)s": "discuss\u00e3o postada %(time_ago)s by %(author)s",
+    "discussion posted %(time_ago)s by %(author)s": "discuss\u00e3o postada %(time_ago)s por %(author)s",
     "dragging": "arrastando",
     "dragging out of slider": "Arrastando para fora da barra deslizante",
     "dropped in slider": "solta na barra deslizante",
