@@ -22,7 +22,8 @@ if (typeof MathJax === 'undefined') {
                 displayMath: [
                     ['\\[', '\\]'],
                     ['[mathjax]', '[/mathjax]']
-                ]
+                ],
+               ignoreClass: "djdt-hidden"
             }
         });
         if (disableFastPreview) {
