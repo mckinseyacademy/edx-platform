@@ -17,4 +17,5 @@ def run():
     NOTE: DO **NOT** add additional code to this method or this file! The Platform Team
           is moving all startup code to more standard locations using Django best practices.
     """
+    a = 1
     django.setup()
