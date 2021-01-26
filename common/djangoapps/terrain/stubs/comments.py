@@ -117,6 +117,8 @@ class StubCommentsServiceHandler(StubHttpRequestHandler):
         self.send_json_response(self.server.config.get('search_result', {}))
 
     def do_comment(self, comment_id):
+        j = 1
+        a = 1
         # django_comment_client calls GET comment before doing a DELETE, so that's what this is here to support.
         if comment_id in self.server.config.get('comments', {}):
             comment = self.server.config['comments'][comment_id]
