@@ -72,5 +72,5 @@ class CompressedTextField(models.TextField):
 
         return value
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):  # pylint: disable=unused-argument
         return self.to_python(value)
