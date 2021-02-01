@@ -444,6 +444,15 @@ class CertificateGetTests(SharedModuleStoreTestCase):
         self.assertEqual(certs[0]['download_url'], 'www.google.com')
         self.assertEqual(certs[1]['download_url'], 'www.gmail.com')
 
+
+    def test_no_certificate_for_user(self):
+        """
+        Test the case when there is no certificate for a user for a specific course.
+        """
+        self.assertIsNone(
+            certs_api.get_certificate_for_user(self.student_no_cert.username, self.web_cert_course.id)
+        )
+
     def test_get_certificates_for_user_by_course_keys(self):
         """
         Test to get certificates for a user for certain course keys,
@@ -458,23 +467,6 @@ class CertificateGetTests(SharedModuleStoreTestCase):
         self.assertEqual(cert['username'], self.student.username)
         self.assertEqual(cert['course_key'], self.web_cert_course.id)
         self.assertEqual(cert['download_url'], 'www.google.com')
-
-    def test_no_certificate_for_user(self):
-        """
-        Test the case when there is no certificate for a user for a specific course.
-        """
-        self.assertIsNone(
-            certs_api.get_certificate_for_user(self.student_no_cert.username, self.web_cert_course.id)
-        )
-
-    def test_no_certificates_for_user(self):
-        """
-        Test the case when there are no certificates for a user.
-        """
-        self.assertEqual(
-            certs_api.get_certificates_for_user(self.student_no_cert.username),
-            []
-        )
 
     @patch.dict(settings.FEATURES, {'CERTIFICATES_HTML_VIEW': True})
     def test_get_web_certificate_url(self):
