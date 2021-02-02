@@ -55,8 +55,8 @@ else
             ;;
 
         1)  # run all of the lms unit tests
-            paver test_system -s lms/djangoapps/certificates/tests/test_api.py --cov-args="-p" --disable-migrations
-            paver test_system -s lms/djangoapps/certificates/apis/v0/tests/test_views.py --cov-args="-p" --disable-migrations
+            paver test_system -s lms lms/djangoapps/certificates/tests/test_api.py --cov-args="-p" --disable-migrations
+            paver test_system -s lms lms/djangoapps/certificates/apis/v0/tests/test_views.py --cov-args="-p" --disable-migrations
             ;;
 
         2)  # run all of the cms unit tests
