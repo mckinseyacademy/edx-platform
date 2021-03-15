@@ -1357,7 +1357,6 @@ INSTALLED_APPS = [
 
     'openedx.core.djangoapps.contentserver',
     'cms.djangoapps.course_creators',
-    'openedx.core.djangoapps.external_auth',
     'student.apps.StudentConfig',  # misleading name due to sharing with lms
     'openedx.core.djangoapps.course_groups',  # not used in cms (yet), but tests run
     'xblock_config.apps.XBlockConfig',
