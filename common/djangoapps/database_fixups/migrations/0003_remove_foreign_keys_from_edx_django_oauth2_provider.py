@@ -101,7 +101,7 @@ class Migration(migrations.Migration):
                 );
 
                 IF @auth_foreign_key IS NOT NULL THEN
-                    -- DROP the existing foreign key and create a new one with CASCADE on delete.
+                    -- DROP the existing foreign key.
                     SET @statement = CONCAT('ALTER TABLE ', given_table, ' DROP FOREIGN KEY ', @auth_foreign_key);
                     PREPARE stmt FROM @statement;
                     EXECUTE stmt;
@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
                 END IF;
 
                 IF @client_foreign_key IS NOT NULL THEN
-                    -- DROP the existing foreign key and create a new one with CASCADE on delete.
+                    -- DROP the existing foreign key.
                     SET @statement = CONCAT('ALTER TABLE ', given_table, ' DROP FOREIGN KEY ', @client_foreign_key);
                     PREPARE stmt FROM @statement;
                     EXECUTE stmt;
